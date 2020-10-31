@@ -4,9 +4,11 @@ import torch
 from torch.optim import Adam
 
 from .base import BaseAgent
-from sacd.model import TwinnedQNetwork, CateoricalPolicy
+from sacd.model import TwinnedQNetwork, CategoricalPolicy
 from sacd.utils import disable_gradients
 
+# If you want to use Prioritized Experience Replay(PER), N-step return 
+# or Dueling Networks, change use_per, multi_step or dueling_net respectively.
 
 class SacdAgent(BaseAgent):
 
@@ -17,6 +19,7 @@ class SacdAgent(BaseAgent):
                  use_per=False, dueling_net=False, num_eval_steps=125000,
                  max_episode_steps=27000, log_interval=10, eval_interval=1000,
                  cuda=True, seed=0):
+
         super().__init__(
             env, test_env, log_dir, num_steps, batch_size, memory_size, gamma,
             multi_step, target_entropy_ratio, start_steps, update_interval,
@@ -24,12 +27,14 @@ class SacdAgent(BaseAgent):
             log_interval, eval_interval, cuda, seed)
 
         # Define networks.
-        self.policy = CateoricalPolicy(
+        self.policy = CategoricalPolicy(
             self.env.observation_space.shape[0], self.env.action_space.n
             ).to(self.device)
+
         self.online_critic = TwinnedQNetwork(
             self.env.observation_space.shape[0], self.env.action_space.n,
             dueling_net=dueling_net).to(device=self.device)
+
         self.target_critic = TwinnedQNetwork(
             self.env.observation_space.shape[0], self.env.action_space.n,
             dueling_net=dueling_net).to(device=self.device).eval()

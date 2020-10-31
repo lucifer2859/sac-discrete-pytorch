@@ -83,6 +83,7 @@ class QNetwork(BaseNetwork):
 
 
 class TwinnedQNetwork(BaseNetwork):
+
     def __init__(self, num_channels, num_actions, shared=False,
                  dueling_net=False):
         super().__init__()
@@ -95,7 +96,7 @@ class TwinnedQNetwork(BaseNetwork):
         return q1, q2
 
 
-class CateoricalPolicy(BaseNetwork):
+class CategoricalPolicy(BaseNetwork):
 
     def __init__(self, num_channels, num_actions, shared=False):
         super().__init__()

@@ -83,7 +83,7 @@ class EpisodicLifeEnv(gym.Wrapper):
         # then update lives to handle bonus lives
         lives = self.env.unwrapped.ale.lives()
         if 0 < lives < self.lives:
-            # for Qbert sometimes we stay in lives == 0 condtion for a few
+            # for Qbert sometimes we stay in lives == 0 condition for a few
             # frames so its important to keep lives > 0, so that we only reset
             # once the environment advertises done.
             done = True
@@ -117,7 +117,7 @@ class MaxAndSkipEnv(gym.Wrapper):
         gym.Wrapper.__init__(self, env)
         # most recent raw observations (for max pooling across time steps)
         self._obs_buffer = np.zeros(
-            (2,)+env.observation_space.shape,
+            (2,) + env.observation_space.shape,
             dtype=env.observation_space.dtype)
         self._skip = skip
 
@@ -140,8 +140,7 @@ class MaxAndSkipEnv(gym.Wrapper):
             total_reward += reward
             if done:
                 break
-        # Note that the observation on the done=True frame
-        # doesn't matter
+        # Note that the observation on the done=True frame doesn't matter
         max_frame = self._obs_buffer.max(axis=0)
 
         return max_frame, total_reward, done, info
