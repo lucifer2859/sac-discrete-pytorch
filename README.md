@@ -1,4 +1,5 @@
 # SAC-Discrete in PyTorch
+## Original Code: https://github.com/ku2482/sac-discrete.pytorch
 This is a PyTorch implementation of SAC-Discrete[[1]](#references). I tried to make it easy for readers to understand the algorithm. Please let me know if you have any questions.
 
 **UPDATE**
