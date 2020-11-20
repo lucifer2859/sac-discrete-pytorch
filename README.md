@@ -29,7 +29,7 @@ If you're using other than CUDA 10.2, you may need to install PyTorch for the pr
 You can train SAC-Discrete agent like this example [here](https://github.com/ku2482/sac-discrete.pytorch/blob/master/train.py).
 
 ```
-python train.py --config config/sacd.yaml --env_id MsPacmanNoFrameskip-v4 --cuda --seed 0
+python train.py --config config/sacd.yaml --env_id MsPacmanNoFrameskip-v4 --device cuda:0 --seed 0
 ```
 
 If you want to use Prioritized Experience Replay(PER), N-step return or Dueling Networks, change `use_per`, `multi_step` or `dueling_net` respectively.
