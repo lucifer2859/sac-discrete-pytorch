@@ -27,7 +27,7 @@ def run(args):
     # Create the agent.
     Agent = SacdAgent if not args.shared else SharedSacdAgent
     agent = Agent(
-        env=env, test_env=test_env, log_dir=log_dir, cuda=args.cuda,
+        env=env, test_env=test_env, log_dir=log_dir, device=args.device,
         seed=args.seed, **config)
     agent.run()
 
@@ -38,7 +38,7 @@ if __name__ == '__main__':
         '--config', type=str, default=os.path.join('config', 'sacd.yaml'))
     parser.add_argument('--shared', action='store_true')
     parser.add_argument('--env_id', type=str, default='MsPacmanNoFrameskip-v4')
-    parser.add_argument('--cuda', action='store_true')
+    parser.add_argument('--device', type=str, default='cuda:0')
     parser.add_argument('--seed', type=int, default=0)
     args = parser.parse_args()
     run(args)

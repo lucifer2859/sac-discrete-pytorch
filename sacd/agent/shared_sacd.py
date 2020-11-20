@@ -16,12 +16,13 @@ class SharedSacdAgent(BaseAgent):
                  update_interval=4, target_update_interval=8000,
                  use_per=False, dueling_net=False, num_eval_steps=125000,
                  max_episode_steps=27000, log_interval=10, eval_interval=1000,
-                 cuda=True, seed=0):
+                 device='cuda:0', seed=0):
+    
         super().__init__(
             env, test_env, log_dir, num_steps, batch_size, memory_size, gamma,
             multi_step, target_entropy_ratio, start_steps, update_interval,
             target_update_interval, use_per, num_eval_steps, max_episode_steps,
-            log_interval, eval_interval, cuda, seed)
+            log_interval, eval_interval, device, seed)
 
         # Define networks.
         self.conv = DQNBase(
